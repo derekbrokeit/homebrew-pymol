@@ -1,16 +1,18 @@
-brew-pymol
+homebrew-pymol
 ==========
 
-Install pymol with home-brew.
+Install pymol with homebrew.
 
     # make sure that brew is up to date
     brew update
 
     # tap this repo
-    brew tap scicalculator/brew-pymol
+    brew tap scicalculator/pymol
 
     # install pymol
     brew install --HEAD pymol
+
+**Requirements:** It's not specified in the brew file, but this requires the latest available XQuartz build of X11.
 
 ## Incomplete
 
