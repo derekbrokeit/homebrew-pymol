@@ -34,8 +34,8 @@ class Pymol < Formula
         ]
 
         # build the pymol libraries
-        system "python", "setup.py", *args
-        system "python", "setup2.py", "install"
+        system "python", "-s", "setup.py", *args
+        system "python", "-s", "setup2.py", "install"
 
         # get the executable
         bin.install("pymol")
