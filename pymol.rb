@@ -12,17 +12,14 @@ class Pymol < Formula
 
     head 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol'
 
-    # depends_on 'cmake' => :build
-    depends_on "python"
     depends_on "glew"
     depends_on "tk"
     depends_on "freetype"
     depends_on :libpng
-    depends_on :x11 # if your formula requires any X11/XQuartz components
+    depends_on :x11
 
     # depends on the Pmw module in python
     depends_on 'Pmw' => :python
-    #depends_on LanguageModuleDependency.new :python, 'Pmw', 'pmw'
 
     def install
         temp_site_packages = lib/which_python/'site-packages'
@@ -35,6 +32,7 @@ class Pymol < Formula
             "--home=#{temp_site_packages}",
             "--install-lib=#{temp_site_packages}",
         ]
+
         # build the pymol libraries
         system "python", "setup.py", *args
         system "python", "setup2.py", "install"
@@ -44,8 +42,10 @@ class Pymol < Formula
     end
 
     def patches
-        # This fixes the setup.py script so that it no longer assumes MacPorts 
-        # The will be submitted upstream 
+        # This fixes the setup.py script so that it no longer assumes MacPorts
+        # this was be submitted upstream
+        # http://sourceforge.net/mailarchive/forum.php?thread_name=CAEoiczdti8kXoVsLpwtRNW3%3DE44PQ1jT%3Dv-cpB2DCotGq8sEjQ%40mail.gmail.com&forum_name=pymol-users
+        # This patch can be removed as soon as the pymol seteup script is less strict about where it gets it's  headers and libraries
         { :p0 => "https://gist.github.com/raw/4267806/9f94f1478251f2f7b01fbed1fd01614ab7681d06/gistfile1.diff" }
     end
 
@@ -54,9 +54,6 @@ class Pymol < Formula
     end
 
     def test
-        # This test will fail and we won't accept that! It's enough to just replace
-        # "false" with the main program this formula installs, but it'd be nice if you
-        # were more thorough. Run the test with `brew test pymol`.
         system "pymol", "-c"
     end
 end
