@@ -1,7 +1,7 @@
 homebrew-pymol
 ==========
 
-Install Pymol with [homebrew][hb].
+Install Pymol with [Homebrew][hb].
 
     # make sure that brew is up to date
     brew update
@@ -23,11 +23,12 @@ branch results in a Pymol library that breaks, so I have disabled it for
 the time being. That's why you have to install from the head/trunk of
 the Pymol repository.
 
-The main QUI works without problems. Another problem is that the
-"external GUI" does not yet seem to work. I haven't figured out how to
-get the "external GUI" to work with this installation. That means there
-is no "file" menu or most of the mouse-friendly menus the external-gui
-provided. You can still use the main gui with it's built in terminal and
+The *main GUI* works without problems, but the "external GUI" does
+not yet work. I haven't figured out how to get the "external GUI" to
+load on launch. That means there is no "file" menu or most of the
+mouse-friendly menus the external-gui provided. That being said, *the
+sidebar and anything incorporated into the main gui is available*.
+You can still use the main gui with it's built in terminal and
 molecular/crystal/whataver-you-like viewer i.e. `load blah.pdb` or `run
 script.py` work without problems.
 
