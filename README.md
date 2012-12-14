@@ -9,6 +9,9 @@ Install Pymol with [Homebrew][hb].
     # tap this repo
     brew tap scicalculator/pymol
 
+    # if you don't already have pmw (check with `python -c "import Pmw"`)
+    brew install pmw
+
     # install pymol
     brew install --HEAD pymol
 
