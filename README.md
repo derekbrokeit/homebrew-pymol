@@ -12,6 +12,7 @@ brew update
 brew tap scicalculator/pymol
 
 # if you don't already have pmw (check with `python -c "import Pmw"`)
+brew tap sameuljohn/python
 brew install pmw
 
 # install pymol
@@ -41,9 +42,12 @@ brew install tk --enable-threads
 # get the modified python install with the new option (currently a pull request with a possible need for further revision)
 brew install https://raw.github.com/samueljohn/homebrew/341a2961eff7665a4f8c219ab907fdc2c40ba598/Library/Formula/python.rb --with-brewed-tk
 
+# don't have pmw yet? get it here:
+brew tap samueljohn/python
+brew install pmw
+
 # now you can get pymol up and running like before
 brew tap scicalculator/pymol
-brew install pmw
 brew install pymol
 ```
 
