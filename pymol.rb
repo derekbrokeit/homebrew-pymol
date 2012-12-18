@@ -7,7 +7,8 @@ class Pymol < Formula
   homepage 'http://pymol.org'
   # the current 'stable' version does not build, please use the '--HEAD' flag for now
   #url 'http://downloads.sourceforge.net/project/pymol/pymol/1.5.0.1/pymol-v1.5.0.1.tar.bz2'
-  version '1.5.0.1'
+  url 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol/', :revision => '4013'
+  version '1.5'
   sha1 'b59ff50437d34f21ca8ffd007a600de4df684073'
 
   head 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol'
