@@ -14,13 +14,14 @@ class Pymol < Formula
   head 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol'
 
   depends_on "glew"
-  depends_on "tk"
   depends_on "freetype"
   depends_on :libpng
   depends_on :x11
 
-  # depends on the Pmw module in python
+  # depends on the Pmw module in python and a python with Tkinter
+  # this, however, does not check that tk is installed with --enable-threads, which is required
   depends_on 'Pmw' => :python
+  depends_on 'Tkinter' => :python
 
   def install
     temp_site_packages = lib/which_python/'site-packages'
