@@ -5,8 +5,6 @@ require 'formula'
 
 class Pymol < Formula
   homepage 'http://pymol.org'
-  # the current 'stable' version does not build, please use the '--HEAD' flag for now
-  #url 'http://downloads.sourceforge.net/project/pymol/pymol/1.5.0.1/pymol-v1.5.0.1.tar.bz2'
   url 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol/', :revision => '4013'
   version '1.5'
   sha1 'b59ff50437d34f21ca8ffd007a600de4df684073'
@@ -45,7 +43,6 @@ class Pymol < Formula
 
   def patches
     # This fixes the setup.py script so that it no longer assumes MacPorts
-    # this was be submitted upstream
     # http://sourceforge.net/mailarchive/forum.php?thread_name=CAEoiczdti8kXoVsLpwtRNW3%3DE44PQ1jT%3Dv-cpB2DCotGq8sEjQ%40mail.gmail.com&forum_name=pymol-users
     # This patch can be removed as soon as the pymol seteup script is less strict about where it gets it's  headers and libraries
     { :p0 => "https://gist.github.com/raw/4267806/9f94f1478251f2f7b01fbed1fd01614ab7681d06/gistfile1.diff" }
@@ -58,4 +55,25 @@ class Pymol < Formula
   def test
     system "pymol", "-c"
   end
+
+  def caveats
+    <<-EOS.undent
+      You can set PYMOL_PATH in your environment to save
+      plugins and scripts. 
+        ex. 
+          export PYMOL_PATH="$HOME/pymol
+
+      In ordert to successfully use pymol's external GUI,
+      you must install tcl and tk with `--enable-threads`.
+
+        tap homebrew/dupes
+        brew install tk --enable-threads
+
+      Additionally, python must be built with homebrew's
+      tk because it typically prefers Apple's tk. 
+        
+        brew install python --with-brewed-tk
+    EOS
+  end
+      
 end
