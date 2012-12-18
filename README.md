@@ -1,31 +1,30 @@
 homebrew-pymol
 ==========
 
-In the end this is how [Pymol][pymol] should be installed with
-[Homebrew][hb]. 
+The simplest way to install [Pymol][pymol] with [Homebrew][hb] is with
+the following method (incomplete install):
+
+**Requirements:** The latest available XQuartz (at least 2.7.2) build of
+X11.
 
 ```
 # make sure that brew is up to date
 brew update
-
-# tap this repo
-brew tap scicalculator/pymol
 
 # if you don't already have pmw (check with `python -c "import Pmw"`)
 brew tap sameuljohn/python
 brew install pmw
 
 # install pymol
+brew tap scicalculator/pymol
 brew install pymol
 ```
-**Requirements:** It's not specified in the brew file, but this requires
-the latest available XQuartz (at least 2.7.2, which came with freeglut)
-build of X11.
 
-However, this method does not utilize Pymol's "External GUI". To get
-that working, please following the more complex installation below. The
-*main GUI* works without problems, but the "external GUI" does not yet
-work out of the box. There are some ways I have devised to get it to
+However, this method does not give access to Pymol's "External GUI"
+because Pymol doesn't use the main thread for it's external gui's. To
+get that working, please following the more complex installation below.
+The *main GUI* works without problems, but the "external GUI" does not
+yet work out of the box. There are some ways I have devised to get it to
 work, but it is currently not yet as simple as I had hoped. People are
 working on it :)
 
@@ -54,6 +53,7 @@ brew install pymol
 When all the hubub about getting python working out of the box with
 tk-tcl is done and over, this should be good for incorporation into the
 [Homebrew/science][hbsci] repository.
+
 
 [hb]:http://mxcl.github.com/homebrew/
 [hbsci]:https://github.com/Homebrew/homebrew-science
