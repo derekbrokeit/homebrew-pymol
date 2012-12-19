@@ -34,8 +34,7 @@ brew uninstall python
 brew uninstall tk
 brew uninstall tcl
 
-# get the modified tcl library (a pull-request that may be unnecessary if we can fix it from python)
-brew install https://raw.github.com/scicalculator/homebrew-dupes/fix_tcl_library_path_var/tcl.rb --enable-threads
+# get tk and tcl with threads enabled 
 brew install tk --enable-threads
 
 # get the modified python install with the new option (currently a pull request with a possible need for further revision)
