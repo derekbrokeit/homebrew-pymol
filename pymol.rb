@@ -53,7 +53,10 @@ class Pymol < Formula
   end
 
   def test
+    # commandline test
     system "pymol", "-c"
+    # hardcore bench test
+    system "pymol","-M","-b","-d","quit"
   end
 
   def caveats
