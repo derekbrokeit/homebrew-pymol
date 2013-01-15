@@ -46,6 +46,8 @@ class Pymol < Formula
     # http://sourceforge.net/mailarchive/forum.php?thread_name=CAEoiczdti8kXoVsLpwtRNW3%3DE44PQ1jT%3Dv-cpB2DCotGq8sEjQ%40mail.gmail.com&forum_name=pymol-users
     # This patch can be removed as soon as the pymol setup script is less strict about where it gets it's  headers and libraries
     p = [ DATA ]
+
+    # This patch adds checks that force mono unless the user explicitly calls for stereo mode
     p << 'https://gist.github.com/raw/1b84b2ad3503395f1041/2a85dc56b4bd1ea28d99ce0b94acbf7ac880deff/pymol_disable_stereo.diff' if build.include? 'default-mono'
     p
   end
