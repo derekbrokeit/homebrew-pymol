@@ -9,6 +9,8 @@ class Pymol < Formula
 
   depends_on "glew"
   depends_on "freetype"
+  depends_on 'python' => 'with-brewed-tk'
+  depends_on 'homebrew/dupes/tk' => 'enable-threads'
   depends_on :libpng
   depends_on :x11
 
