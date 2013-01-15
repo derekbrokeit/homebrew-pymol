@@ -5,7 +5,6 @@ class Pymol < Formula
   url 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol/', :revision => '4013'
   version '1.5'
   sha1 'b59ff50437d34f21ca8ffd007a600de4df684073'
-
   head 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol'
 
   depends_on "glew"
@@ -13,12 +12,12 @@ class Pymol < Formula
   depends_on :libpng
   depends_on :x11
 
-  # depends on the Pmw and Tkinter python packages
-  # this, however, does not check full compatability
   # To use external GUI tk must be built with --enable-threads
   # and python must be setup to use that version of tk with --with-brewed-tk
   depends_on 'Pmw' => :python
   depends_on 'Tkinter' => :python
+
+  option 'default-mono', 'Set mono graphics as default'
 
   def install
     temp_site_packages = lib/which_python/'site-packages'
@@ -44,7 +43,9 @@ class Pymol < Formula
     # This fixes the setup.py script so that it no longer assumes MacPorts
     # http://sourceforge.net/mailarchive/forum.php?thread_name=CAEoiczdti8kXoVsLpwtRNW3%3DE44PQ1jT%3Dv-cpB2DCotGq8sEjQ%40mail.gmail.com&forum_name=pymol-users
     # This patch can be removed as soon as the pymol setup script is less strict about where it gets it's  headers and libraries
-    { :p0 => "https://gist.github.com/raw/4267806/9f94f1478251f2f7b01fbed1fd01614ab7681d06/gistfile1.diff" }
+    p = [ DATA ]
+    p << 'https://gist.github.com/raw/1b84b2ad3503395f1041/2a85dc56b4bd1ea28d99ce0b94acbf7ac880deff/pymol_disable_stereo.diff' if build.include? 'default-mono'
+    p
   end
 
   def which_python
@@ -57,34 +58,35 @@ class Pymol < Formula
 
   def caveats
     <<-EOS.undent
-      You can set PYMOL_PATH in your environment to save
-      plugins and scripts. To a central location. Homebrew
-      does not maintain this.
-        ex. 
-          export PYMOL_PATH="$HOME/pymol
 
-      --- 
-      Onoe, is your external GUI missing?
+    On some macs, the graphics drivers do not properly support stereo
+    graphics. This will cause visual glitches and shaking that stay
+    visible until x11 is completely closed. If this affects your
+    computer, you may want to install with the '--default-mono' option
+    or run pymol with the "-M" flag.
 
-      In ordert to successfully use pymol's external GUI,
-      you must install tcl and tk with '--enable-threads'. 
-      and then link python to it. Don't forget  to uninstall
-      tk, tcl, and python brews if you already had them.
+      pymol -M
 
-        brew tap homebrew/dupes
-        brew install tk --enable-threads
-        brew install python --with-brewed-tk
+    If you use '--default-mono', you can still try stereo by running:
 
-      Additionally, if you don't already have it, you should
-      get the Python megawidgets package.
+      pymol -S
 
-        brew tap samueljohn/python
-        brew install pmw
-      ---
-
-      License information is here:
-      #{prefix}/LICENSE
     EOS
   end
       
 end
+
+__END__
+diff --git a/setup.py b/setup.py
+index b5819d6..0f40b2e 100644
+--- a/setup.py
++++ b/setup.py
+@@ -153,7 +153,7 @@ elif sys.platform=='darwin':
+         outputheader.close()
+         outputfile.close()
+ 
+-        EXT = "/opt/local"
++        EXT = "HOMEBREW_PREFIX"
+         inc_dirs=["ov/src",
+                   "layer0","layer1","layer2",
+                   "layer3","layer4","layer5",
