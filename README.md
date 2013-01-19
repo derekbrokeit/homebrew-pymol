@@ -11,10 +11,6 @@ X11.
 # make sure that brew is up to date
 brew update
 
-# if you don't already have pmw (check with `python -c "import Pmw"`)
-brew tap sameuljohn/python
-brew install pmw
-
 # install pymol
 brew tap scicalculator/pymol
 brew install pymol
@@ -35,10 +31,11 @@ brew uninstall tk
 brew uninstall tcl
 
 # get tk and tcl with threads enabled 
+brew tap homebrew/dupes
 brew install tk --enable-threads
 
-# get the modified python install with the new option (currently a pull request with a possible need for further revision)
-brew install https://raw.github.com/samueljohn/homebrew/341a2961eff7665a4f8c219ab907fdc2c40ba598/Library/Formula/python.rb --with-brewed-tk
+# install python linked to the above tk installation
+brew install python --with-brewed-tk
 
 # don't have pmw yet? get it here:
 brew tap samueljohn/python
@@ -49,8 +46,7 @@ brew tap scicalculator/pymol
 brew install pymol
 ```
 
-When all the hubub about getting python working out of the box with
-tk-tcl is done and over, this should be good for incorporation into the
+This is almost ready for primetime. Currently this is awaiting approval at the
 [Homebrew/science][hbsci] repository.
 
 
