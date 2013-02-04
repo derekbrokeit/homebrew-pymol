@@ -4,13 +4,12 @@ class Pymol < Formula
   homepage 'http://pymol.org'
   url 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol/', :revision => '4013'
   version '1.5'
-  sha1 'b59ff50437d34f21ca8ffd007a600de4df684073'
   head 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol'
 
   depends_on "glew"
-  depends_on "freetype"
   depends_on 'python' => 'with-brewed-tk'
   depends_on 'homebrew/dupes/tk' => 'enable-threads'
+  depends_on :freetype
   depends_on :libpng
   depends_on :x11
 
@@ -19,7 +18,7 @@ class Pymol < Formula
   depends_on 'Pmw' => :python
   depends_on 'Tkinter' => :python
 
-  option 'default-mono', 'Set mono graphics as default'
+  option 'default-stereo', 'Set stereo graphics as default'
 
   def install
     temp_site_packages = lib/which_python/'site-packages'
@@ -42,13 +41,12 @@ class Pymol < Formula
   end
 
   def patches
-    # This fixes the setup.py script so that it no longer assumes MacPorts
-    # http://sourceforge.net/mailarchive/forum.php?thread_name=CAEoiczdti8kXoVsLpwtRNW3%3DE44PQ1jT%3Dv-cpB2DCotGq8sEjQ%40mail.gmail.com&forum_name=pymol-users
     # This patch can be removed as soon as the pymol setup script is less strict about where it gets it's  headers and libraries
+    # http://sourceforge.net/mailarchive/forum.php?thread_name=CAEoiczdti8kXoVsLpwtRNW3%3DE44PQ1jT%3Dv-cpB2DCotGq8sEjQ%40mail.gmail.com&forum_name=pymol-users
     p = [ DATA ]
 
-    # This patch adds checks that force mono unless the user explicitly calls for stereo mode
-    p << 'https://gist.github.com/raw/1b84b2ad3503395f1041/2a85dc56b4bd1ea28d99ce0b94acbf7ac880deff/pymol_disable_stereo.diff' if build.include? 'default-mono'
+    # This patch adds checks that force mono as default
+    p << 'https://gist.github.com/raw/1b84b2ad3503395f1041/2a85dc56b4bd1ea28d99ce0b94acbf7ac880deff/pymol_disable_stereo.diff' unless build.include? 'default-stereo'
     p
   end
 
@@ -59,28 +57,36 @@ class Pymol < Formula
   def test
     # commandline test
     system "pymol","-c"
-    # serious bench test
-    system "pymol","-b","-d","quit"
+    if build.include? "gui"
+        # serious bench test
+        system "pymol","-b","-d","quit"
+    end
   end
 
   def caveats
     <<-EOS.undent
 
+    In order to get the most out of pymol, you will want the external
+    gui. This requires a thread enabled tk installation and python
+    linked to it. Install these with the following commands.
+      brew tap homebrew/dupes
+      brew install homebrew/dupes/tk --enable-threads
+      brew install python --with-brewed-tk
+
     On some macs, the graphics drivers do not properly support stereo
     graphics. This will cause visual glitches and shaking that stay
-    visible until x11 is completely closed. If this affects your
-    computer, you may want to install with the '--default-mono' option
-    or run pymol with the "-M" flag.
-
-      pymol -M
-
-    If you use '--default-mono', you can still try stereo by running:
-
+    visible until x11 is completely closed. This may even require
+    restarting your computer. Therefore, we install pymol in a way that
+    defaults to mono graphics. This is equivalent to running pymol with
+    the "-M" option. You can still run in stereo mode by running
       pymol -S
+
+    You can install pymol such that it defaults to stereo with the
+    "--default-stereo" option.
 
     EOS
   end
-      
+
 end
 
 __END__
