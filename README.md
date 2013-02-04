@@ -47,7 +47,7 @@ brew install pymol
 ```
 
 This is almost ready for primetime. Currently this is awaiting approval at the
-[Homebrew/science][hbsci] repository.
+[Homebrew/science][hbsci] repository homebrew/homebrew-science#68.
 
 
 [hb]:http://mxcl.github.com/homebrew/
