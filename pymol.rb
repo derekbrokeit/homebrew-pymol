@@ -3,7 +3,7 @@ require 'formula'
 class Pymol < Formula
   homepage 'http://pymol.org'
   url 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol/', :revision => '4013'
-  version '1.5'
+  version '1.5.1'
   head 'https://pymol.svn.sourceforge.net/svnroot/pymol/trunk/pymol'
 
   depends_on "glew"
@@ -21,6 +21,14 @@ class Pymol < Formula
   option 'default-stereo', 'Set stereo graphics as default'
 
   def install
+    opoo "This tap is outdated!"
+    opoo "Please follow these procedures"
+    opoo ""
+    opoo "% brew untap scicalculator/pymol"
+    opoo "% brew tap homebrew/science"
+    opoo "% brew install pymol"
+    opoo ""
+    onoe "Again, this tap is outdated!"
     temp_site_packages = lib/which_python/'site-packages'
     mkdir_p temp_site_packages
     ENV['PYTHONPATH'] = temp_site_packages
