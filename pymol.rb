@@ -26,6 +26,7 @@ class Pymol < Formula
     opoo ""
     opoo "% brew untap scicalculator/pymol"
     opoo "% brew tap homebrew/science"
+    opoo "% brew install python --with-brewed-tk --enable-threads --with-x11"
     opoo "% brew install pymol"
     opoo ""
     onoe "Again, this tap is outdated!"
