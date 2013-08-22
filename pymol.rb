@@ -30,23 +30,23 @@ class Pymol < Formula
     opoo "% brew install pymol"
     opoo ""
     onoe "Again, this tap is outdated!"
-    temp_site_packages = lib/which_python/'site-packages'
-    mkdir_p temp_site_packages
-    ENV['PYTHONPATH'] = temp_site_packages
+    #temp_site_packages = lib/which_python/'site-packages'
+    #mkdir_p temp_site_packages
+    #ENV['PYTHONPATH'] = temp_site_packages
 
-    args = [
-      "build",
-      "install",
-      "--home=#{temp_site_packages}",
-      "--install-lib=#{temp_site_packages}",
-    ]
+    #args = [
+    #  "build",
+    #  "install",
+    #  "--home=#{temp_site_packages}",
+    #  "--install-lib=#{temp_site_packages}",
+    #]
 
     # build the pymol libraries
-    system "python", "-s", "setup.py", *args
-    system "python", "-s", "setup2.py", "install"
+    #system "python", "-s", "setup.py", *args
+    #system "python", "-s", "setup2.py", "install"
 
     # get the executable
-    bin.install("pymol")
+    #bin.install("pymol")
   end
 
   def patches
