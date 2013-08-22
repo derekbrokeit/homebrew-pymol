@@ -7,7 +7,7 @@ This requires [homebrew](hb) for osx.
 ```
 $ brew tap homebrew/science
 $ brew install python --with-brewed-tk --enable-threads --with-x11
-$ brew install pymo
+$ brew install pymol
 ```
 
 Now you should be on your way to using the latest version of pymol!
